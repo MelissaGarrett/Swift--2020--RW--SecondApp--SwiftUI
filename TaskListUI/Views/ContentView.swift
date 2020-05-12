@@ -28,7 +28,7 @@ struct ContentView: View {
         )
         }
         .sheet(isPresented: $modalIsPresented) {
-            NewTaskView()
+            NewTaskView(taskStore: self.taskStore)
         }
     }
 }

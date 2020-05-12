@@ -9,15 +9,27 @@
 import SwiftUI
 
 struct NewTaskView: View {
+    var taskStore: TaskStore
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     @State var taskName = ""
 
     var body: some View {
-        TextField("Task Name", text: $taskName)
+        Form {
+            TextField("Task Name", text: $taskName)
+            
+            Button("Add") {
+                self.taskStore.tasks.append(Task(name: self.taskName))
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            .disabled(taskName.isEmpty)
+        }
     }
 }
 
 struct NewTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTaskView()
+        NewTaskView(taskStore: TaskStore())
     }
 }
