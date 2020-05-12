@@ -6,8 +6,10 @@
 //  Copyright © 2020 MelissaGarrett. All rights reserved.
 //
 
-class TaskStore {
-    var tasks = [
+import Combine
+
+class TaskStore: ObservableObject {
+    @Published var tasks = [
         "Code a SwiftUI app",
         "Take a nap",
         "Eat pizza",
