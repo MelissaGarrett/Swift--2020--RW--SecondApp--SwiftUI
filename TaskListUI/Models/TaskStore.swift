@@ -9,18 +9,6 @@
 import Combine
 
 class TaskStore: ObservableObject {
-    @Published var tasks = [
-        "Code a SwiftUI app",
-        "Take a nap",
-        "Eat pizza",
-        "Watch MJ documentary",
-        "Buy new Nikes",
-        "Have a margarita",
-        "Visit New York",
-        "Visit a beach",
-        "Buy new car",
-        "Buy new house"
-        ].map { Task(name: $0)}
     
     @Published var prioritizedTasks = [
         PrioritizedTasks(
@@ -54,6 +42,10 @@ class TaskStore: ObservableObject {
             ]
         )
     ]
+    
+    func getIndex(for priority: Task.Priority) -> Int {
+        prioritizedTasks.firstIndex { $0.priority == priority }!
+    }
 }
 
 private extension TaskStore.PrioritizedTasks {

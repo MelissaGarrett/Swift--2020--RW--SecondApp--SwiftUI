@@ -14,13 +14,16 @@ struct NewTaskView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var taskName = ""
+    @State var priority: Task.Priority = .no
 
     var body: some View {
         Form {
             TextField("Task Name", text: $taskName)
             
             Button("Add") {
-                self.taskStore.tasks.append(Task(name: self.taskName))
+                let priorityIndex = self.taskStore.getIndex(for: self.priority)
+                
+                self.taskStore.prioritizedTasks[priorityIndex].tasks.append(Task(name: self.taskName))
                 self.presentationMode.wrappedValue.dismiss()
             }
             .disabled(taskName.isEmpty)
